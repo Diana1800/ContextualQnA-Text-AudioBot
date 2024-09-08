@@ -1,2 +1,2 @@
 # ContextualQnA-Text-AudioBot
-Q&amp;A app using OpenAI and LangChain to provide answers from a crawled website or dataset, with text and audio input support via Whisper.
+A web-based Q&A application powered by OpenAI's API and LangChain. The system crawls website content to provide context-based answers, with support for both text and audio input using OpenAI's Whisper. Perfect for interactive and dynamic responses from specific knowledge sources.
