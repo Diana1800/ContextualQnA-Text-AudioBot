@@ -59,18 +59,18 @@ History: Each interaction (both question and answer) is stored and displayed in 
 
 The app has a simple and clean user interface:
 
-    Top Section: Title and icon.
-    Middle Section: Scrollable area displaying conversation history (both text and audio).
-    Bottom Section: Input field for text and file upload button for audio. Users can submit questions or clear the audio file.
+Top Section: Title and icon.
+Middle Section: Scrollable area displaying conversation history (both text and audio).
+Bottom Section: Input field for text and file upload button for audio. Users can submit questions or clear the audio file.
 
 💡 How to Use
 
-    Submit a question:
-        Enter your question in the text box and click Go! to submit it.
-    Submit an audio file:
-        Upload an audio file (in .wav, .mp3, .ogg, .flac, or .m4a format), and the system will transcribe it and generate a response.
-    Clear audio file:
-        If you need to clear the selected audio file, click Clear to remove the file.
+Submit a question:
+Enter your question in the text box and click Go! to submit it.
+Submit an audio file:
+Upload an audio file (in .wav, .mp3, .ogg, .flac, or .m4a format), and the system will transcribe it and generate a response.
+Clear audio file:
+If you need to clear the selected audio file, click Clear to remove the file.
 
 
 
