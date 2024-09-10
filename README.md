@@ -29,6 +29,7 @@ Clone the repository:
 Install the required packages from requirements.txt
 
 Install Whisper from git:
+
     pip install git+https://github.com/openai/whisper.git
 
 Update the env file with your OpenAI API key
