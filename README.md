@@ -22,21 +22,15 @@ This is a Flask-based web application that allows users to ask questions via tex
 
     Clone the repository:
 
-    bash
-
-git clone https://github.com/yourusername/contextual-qna-bot.git
+git clone https://github.com/diana1800/contextual-qna-bot.git
 cd contextual-qna-bot
 
 Set up a virtual environment:
-
-bash
 
 python -m venv venv
 source venv/bin/activate  # For Windows: venv\Scripts\activate
 
 Install the required packages:
-
-bash
 
 pip install -r requirements.txt
 
@@ -45,21 +39,7 @@ Set up environment variables:
     Create a .env file in the root directory.
     Add your OpenAI API key to the .env file:
 
-    makefile
-
     OPENAI_API_KEY=your_openai_api_key
-
-Install ffmpeg for audio conversion:
-
-bash
-
-sudo apt-get install ffmpeg
-
-Run the application:
-
-bash
-
-    python app.py
 
     Access the application:
         Open your web browser and go to http://127.0.0.1:5000.
