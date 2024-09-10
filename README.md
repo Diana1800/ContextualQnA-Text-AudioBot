@@ -52,8 +52,6 @@ Set up environment variables:
 
 🗂️ Project Structure
 
-csharp
-
 .
 ├── app.py                # Main Flask application
 ├── requirements.txt      # Python dependencies
