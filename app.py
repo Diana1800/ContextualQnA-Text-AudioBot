@@ -6,20 +6,17 @@ from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 import openai
 from dotenv import load_dotenv
-from pydub import AudioSegment
 
-# Load environment variables
 load_dotenv()
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
-# Initialize OpenAI model (gpt-4o for LangChain)
 llm = ChatOpenAI(temperature=0, model='gpt-4o')
 
-# Load the Whisper model for audio transcription
+# Load the Whisper model
 model = whisper.load_model("base")
 
-# Load the content from a text file
-with open('context.txt', 'r', encoding='utf-8') as file:
+# Load the content of from TXT file
+with open('/home/diana/Documents/me.txt', 'r', encoding='utf-8') as file:
     all_data = file.read()
 
 # Define the prompt template for LangChain
@@ -35,80 +32,82 @@ Answer the following question:
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Save session
 
-# Allowed audio file extensions
+# Allowed extensions for audio files
 ALLOWED_EXTENSIONS = {'wav', 'mp3', 'ogg', 'flac'}
 
-# Helper function to check if the file extension is allowed
+# Helper function to check if the file has an allowed extension
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+    
 @app.route('/', methods=['GET', 'POST'])
 def chat():
+
     if request.method == 'POST':
         user_input = request.form.get('user_input', None)
         audio_file = request.files.get('audio_file', None)
+        print(f"Received user input: {user_input}")
+        print(f"Received audio file: {audio_file.filename if audio_file else 'No audio file uploaded'}")
+
         transcribed_audio = None
 
-        # Handle audio file: Only process audio if uploaded
+        # Check if there is an audio file
         if audio_file and allowed_file(audio_file.filename):
             filename = secure_filename(audio_file.filename)
             audio_path = os.path.join('/tmp', filename)
-            audio_file.save(audio_path)
+            audio_file.save(audio_path)                       # Save the file temporarily
             print(f"Saved audio file to: {audio_path}")
 
-            # Convert audio to .wav if necessary
+            # Load and transcribe audio using Whisper locally
             try:
-                if audio_path.endswith('.m4a'):
-                    wav_path = audio_path.replace('.m4a', '.wav')
-                    AudioSegment.from_file(audio_path).export(wav_path, format='wav')
-                    audio_path = wav_path
-                    print(f"Converted m4a to wav: {audio_path}")
-
-                # Transcribe audio using Whisper
                 audio = whisper.load_audio(audio_path)
                 audio = whisper.pad_or_trim(audio)
                 mel = whisper.log_mel_spectrogram(audio).to(model.device)
-                result = whisper.decode(model, mel, whisper.DecodingOptions())
+
+                # Detect language 
+                _, probs = model.detect_language(mel)
+                print(f"Detected language: {max(probs, key=probs.get)}")
+
+                # Decode the audio
+                options = whisper.DecodingOptions()
+                result = whisper.decode(model, mel, options)
                 transcribed_audio = result.text
                 print(f"Transcribed audio: {transcribed_audio}")
             except Exception as e:
-                print(f"Error processing audio: {e}")
-                return jsonify({'response': f"Error processing audio: {str(e)}"}), 500
+                print(f"Error processing audio with Whisper: {e}")
 
-        # If transcribed audio exists and there's no text input, use the transcribed audio
-        if transcribed_audio and not user_input:
+        # Use the transcribed audio as input if available
+        if transcribed_audio:
             user_input = transcribed_audio
-            print(f"Using transcribed audio as user input: {user_input}")
 
-        # If neither input nor audio is available, return an error
         if not user_input:
-            print("Error: No input provided")
+            print("Error: No input provided")                  # Debugging print
             return jsonify({'response': 'Error: No input provided'}), 400
 
-        # Initialize session if not already done
         if 'chat_history' not in session:
             session['chat_history'] = []
 
-        # Generate an answer using LangChain
+        # Combine the data into context
+        context = all_data    
+        print(f"Context Length: {len(context)}")
+
+        # Generate an answer using LangChain (Replace this with your own logic)
         prompt = PromptTemplate(input_variables=["context", "question"], template=prompt_template)
-        runnable_sequence = prompt | llm
-        answer = runnable_sequence.invoke({"context": all_data, "question": user_input})
+        runnable_sequence = prompt | llm  
+        answer = runnable_sequence.invoke({"context": context, "question": user_input})
+
         print(f"Generated Answer: {answer.content}")
 
-        # Append chat history
+        #session['chat_history'].append(f"You: {user_input}<br>AI: {answer.content}<br>")
         session['chat_history'].append(
             f'<span style="color: orange;">You:</span> {user_input}<br>'
-            f'<span style="color: green;">AI:</span> {answer.content}<br>'
-        )
-        print("Appended to chat history.")
+            f'<span style="color: green;">AI:</span> {answer.content}<br>')
 
-        # Ensure session is updated
         chat_history = "<br>".join(session['chat_history'])
-        session.modified = True  # Force session save
-        print("Session modified and chat history prepared.")
-
+        session.modified = True 
         return jsonify({'response': chat_history})
 
+    # Initialize chat history for GET requests
+    # session['chat_history'] = []
     return render_template_string(template)
 
 if __name__ == '__main__':
