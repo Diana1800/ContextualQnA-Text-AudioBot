@@ -21,39 +21,26 @@ HTML/CSS/JavaScript: Basic front-end interface for interaction.
 
 📦 Installation
 
-    Clone the repository:
+Clone the repository:
 
-git clone https://github.com/diana1800/contextual-qna-bot.git
-cd contextual-qna-bot
+    git clone https://github.com/diana1800/contextual-qna-bot.git
+    cd contextual-qna-bot
 
-Set up a virtual environment:
-
-python -m venv venv
-source venv/bin/activate  # For Windows: venv\Scripts\activate
-
-Install the required packages:
-
-pip install -r requirements.txt
+Install the required packages from requirements.txt
 
 Install Whisper from git:
-pip install git+https://github.com/openai/whisper.git
+    pip install git+https://github.com/openai/whisper.git
+
+Update the env file with your OpenAI API key
 
 
-Set up environment variables:
-
-    Create a .env file in the root directory.
-    Add your OpenAI API key to the .env file:
-
-    OPENAI_API_KEY=your_openai_api_key
-
-    Access the application:
-        Open your web browser and go to http://127.0.0.1:5000.
+Access the application: Open your web browser and go to http://127.0.0.1:5000.
 
 ⚙️ How It Works
 
-    Text Input: Users can enter their question in the text input field and press Go!. The question will be processed by GPT-4, and the response will be displayed below.
-    Audio Input: Users can upload an audio file by clicking the Choose File button, which is then transcribed using Whisper. The transcribed text is treated as the user input and processed by GPT-4.
-    History: Each interaction (both question and answer) is stored and displayed in a scrollable container.
+Text Input: Users can enter their question in the text input field and press Go!. The question will be processed by GPT-4, and the response will be displayed below.
+Audio Input: Users can upload an audio file by clicking the Choose File button, which is then transcribed using Whisper. The transcribed text is treated as the user input and processed by GPT-4.
+History: Each interaction (both question and answer) is stored and displayed in a scrollable container.
 
 🗂️ Project Structure
 
