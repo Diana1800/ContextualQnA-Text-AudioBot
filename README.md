@@ -1,2 +1,105 @@
-# ContextualQnA-Text-AudioBot
-A web-based Q&A application powered by OpenAI's API and LangChain. The system crawls website content to provide context-based answers, with support for both text and audio input using OpenAI's Whisper. Perfect for interactive and dynamic responses from specific knowledge sources.
+📱 Contextual Q&A Bot with Text and Audio Support 🤖
+
+This is a Flask-based web application that allows users to ask questions via text input or upload audio files for transcription and receive answers using OpenAI's GPT-4 model. The app also leverages Whisper for audio transcription and supports multiple audio formats. The application logs the conversation history and provides feedback for unsupported file formats.
+🧠 Key Features
+
+    Text-Based Q&A: Users can submit text questions, which are answered using OpenAI's GPT-4 model.
+    Audio Transcription: Users can upload audio files, which are transcribed into text using Whisper, and the transcribed text is used as the question input.
+    Supported Audio Formats: The app supports audio files in .wav, .mp3, .ogg, and .flac formats. It also converts .m4a files to .wav before transcription.
+    Conversation History: The app logs all questions and answers in the session, so users can scroll through the conversation history.
+    Error Handling: Graceful handling of unsupported file formats and missing inputs, with error messages returned to the user.
+
+🛠️ Tech Stack
+
+    Flask: Backend framework for handling requests and rendering the front end.
+    OpenAI GPT-4: Used for generating answers to user questions.
+    Whisper: For transcribing audio input into text.
+    LangChain: Used for question-answering tasks with context management.
+    Pydub: Used for converting audio files (e.g., .m4a to .wav).
+    HTML/CSS/JavaScript: Basic front-end interface for interaction.
+
+📦 Installation
+
+    Clone the repository:
+
+    bash
+
+git clone https://github.com/yourusername/contextual-qna-bot.git
+cd contextual-qna-bot
+
+Set up a virtual environment:
+
+bash
+
+python -m venv venv
+source venv/bin/activate  # For Windows: venv\Scripts\activate
+
+Install the required packages:
+
+bash
+
+pip install -r requirements.txt
+
+Set up environment variables:
+
+    Create a .env file in the root directory.
+    Add your OpenAI API key to the .env file:
+
+    makefile
+
+    OPENAI_API_KEY=your_openai_api_key
+
+Install ffmpeg for audio conversion:
+
+bash
+
+sudo apt-get install ffmpeg
+
+Run the application:
+
+bash
+
+    python app.py
+
+    Access the application:
+        Open your web browser and go to http://127.0.0.1:5000.
+
+⚙️ How It Works
+
+    Text Input: Users can enter their question in the text input field and press Go!. The question will be processed by GPT-4, and the response will be displayed below.
+    Audio Input: Users can upload an audio file by clicking the Choose File button, which is then transcribed using Whisper. The transcribed text is treated as the user input and processed by GPT-4.
+    History: Each interaction (both question and answer) is stored and displayed in a scrollable container.
+
+🗂️ Project Structure
+
+csharp
+
+.
+├── app.py                # Main Flask application
+├── requirements.txt      # Python dependencies
+├── templates             # HTML template
+├── static                # Static files (CSS, JS)
+└── README.md             # Project documentation
+
+🖼️ User Interface
+
+The app has a simple and clean user interface:
+
+    Top Section: Title and icon.
+    Middle Section: Scrollable area displaying conversation history (both text and audio).
+    Bottom Section: Input field for text and file upload button for audio. Users can submit questions or clear the audio file.
+
+💡 How to Use
+
+    Submit a question:
+        Enter your question in the text box and click Go! to submit it.
+    Submit an audio file:
+        Upload an audio file (in .wav, .mp3, .ogg, .flac, or .m4a format), and the system will transcribe it and generate a response.
+    Clear audio file:
+        If you need to clear the selected audio file, click Clear to remove the file.
+
+
+
+
+![image](https://github.com/user-attachments/assets/f83842a0-5719-4823-9489-b5035c947fd9)
+
