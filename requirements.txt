@@ -1,5 +1,4 @@
 Flask==2.0.1
 whisper==1.0
 openai==0.27.0
-pydub==0.25.1
 langchain==0.0.150
