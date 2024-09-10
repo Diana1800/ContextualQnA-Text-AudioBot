@@ -35,6 +35,10 @@ Install the required packages:
 
 pip install -r requirements.txt
 
+Install Whisper from git:
+pip install git+https://github.com/openai/whisper.git
+
+
 Set up environment variables:
 
     Create a .env file in the root directory.
