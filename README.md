@@ -1,6 +1,7 @@
-📱 Contextual Q&A Bot with Text and Audio Support 🤖
+📱 Your content Q&A Bot with Text and Audio input Support 🤖
 
 This is a Flask-based web application that allows users to ask questions via text input or upload audio files for transcription and receive answers using OpenAI's GPT-4 model. The app also leverages Whisper for audio transcription and supports multiple audio formats. The application logs the conversation history and provides feedback for unsupported file formats.
+
 🧠 Key Features
 
     Text-Based Q&A: Users can submit text questions, which are answered using OpenAI's GPT-4 model.
@@ -52,11 +53,15 @@ Set up environment variables:
 
 🗂️ Project Structure
 
-.
+
 ├── app.py                # Main Flask application
+
 ├── requirements.txt      # Python dependencies
+
 ├── templates             # HTML template
+
 ├── static                # Static files (CSS, JS)
+
 └── README.md             # Project documentation
 
 🖼️ User Interface
