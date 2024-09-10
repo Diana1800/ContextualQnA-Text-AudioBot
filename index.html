@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContextualQnA-Text-AudioBot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #343a40;
+        }
+        .container {
+            width: 50%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .output {
+            border: 1px solid #ddd;
+            padding: 10px;
+            min-height: 150px;
+            max-height: 200px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: #fafafa;
+            color: #4a4a4a;
+            overflow-y: auto;
+        }
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .input-container input[type="text"], .input-container input[type="file"] {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .input-container button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #2d77a1;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .input-container button:hover {
+            background-color: #86bbd8;
+        }
+        h1 {
+            text-align: center;
+            color: #ee6c4d;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>           
+            Contextual Q&A Bot 🤖
+        </h1>
+
+        <div class="output" id="output">Let's rock...</div>
+
+        <div class="input-container">
+            <input type="text" id="user_input" placeholder="Shoot Your Questions...">
+            <input type="file" id="audio_file" accept="audio/*">
+            <button onclick="clearAudio()">Clear</button> <!-- Clear button -->
+            <button onclick="submitForm()">Go!</button>
+        </div>
+        <div class="footer">
+            Created by <a href="https://github.com/diana1800" target="_blank">Diana1800</a>
+        </div>
+    </div>
+
+    <script>
+        function clearAudio() {
+            document.getElementById('audio_file').value = '';
+            console.log('Audio file cleared');
+        }
+
+        function submitForm() {
+            const userInput = document.getElementById('user_input').value;
+            const audioFile = document.getElementById('audio_file').files[0];
+            const formData = new FormData();
+            formData.append('user_input', userInput);
+            if (audioFile) {
+                formData.append('audio_file', audioFile);
+                console.log('Audio file appended:', audioFile);
+            }
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerHTML = data.response;
+                document.getElementById('user_input').value = '';  // Clear input
+            })
+            .catch(error => {
+                console.error('Error occurred:', error);
+            });
+        }
+    </script>
+</body>
+</html>
