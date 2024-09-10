@@ -53,6 +53,12 @@
         .input-container button:hover {
             background-color: #86bbd8;
         }
+        .input-container button.clear {
+            background-color: #bd1d24; 
+        }
+        .input-container button.clear:hover {
+            background-color: #f44336;
+        }
         h1 {
             text-align: center;
             color: #ee6c4d;
@@ -70,6 +76,12 @@
         .footer a:hover {
             text-decoration: underline;
         }
+        .robot-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +95,7 @@
         <div class="input-container">
             <input type="text" id="user_input" placeholder="Shoot Your Questions...">
             <input type="file" id="audio_file" accept="audio/*">
-            <button onclick="clearAudio()">Clear</button> <!-- Clear button -->
+            <button class="clear" onclick="clearAudio()">Clear</button> <!-- Clear button -->
             <button onclick="submitForm()">Go!</button>
         </div>
         <div class="footer">
@@ -92,9 +104,10 @@
     </div>
 
     <script>
+        // Clear the selected audio file
         function clearAudio() {
-            document.getElementById('audio_file').value = '';
-            console.log('Audio file cleared');
+            document.getElementById('audio_file').value = '';  // Clear the file input
+            console.log('Audio file cleared');  // Debugging
         }
 
         function submitForm() {
@@ -104,20 +117,22 @@
             formData.append('user_input', userInput);
             if (audioFile) {
                 formData.append('audio_file', audioFile);
-                console.log('Audio file appended:', audioFile);
+                console.log('Audio file appended:', audioFile);  // Debugging
             }
 
+            // Send the request to the backend
             fetch('/', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
+                console.log('Response received from server:', data);  // Debugging
                 document.getElementById('output').innerHTML = data.response;
-                document.getElementById('user_input').value = '';  // Clear input
+                document.getElementById('user_input').value = '';  // Clear the input field after request
             })
             .catch(error => {
-                console.error('Error occurred:', error);
+                console.error('Error occurred:', error);  // Log any errors
             });
         }
     </script>
