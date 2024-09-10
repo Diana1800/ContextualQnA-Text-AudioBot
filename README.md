@@ -4,20 +4,20 @@ This is a Flask-based web application that allows users to ask questions via tex
 
 🧠 Key Features
 
-    Text-Based Q&A: Users can submit text questions, which are answered using OpenAI's GPT-4 model.
-    Audio Transcription: Users can upload audio files, which are transcribed into text using Whisper, and the transcribed text is used as the question input.
-    Supported Audio Formats: The app supports audio files in .wav, .mp3, .ogg, and .flac formats. It also converts .m4a files to .wav before transcription.
-    Conversation History: The app logs all questions and answers in the session, so users can scroll through the conversation history.
-    Error Handling: Graceful handling of unsupported file formats and missing inputs, with error messages returned to the user.
+Text-Based Q&A: Users can submit text questions, which are answered using OpenAI's GPT-4 model.
+Audio Transcription: Users can upload audio files, which are transcribed into text using Whisper, and the transcribed text is used as the question input.
+Supported Audio Formats: The app supports audio files in .wav, .mp3, .ogg, and .flac formats. It also converts .m4a files to .wav before transcription.
+Conversation History: The app logs all questions and answers in the session, so users can scroll through the conversation history.
+Error Handling: Graceful handling of unsupported file formats and missing inputs, with error messages returned to the user.
 
 🛠️ Tech Stack
 
-    Flask: Backend framework for handling requests and rendering the front end.
-    OpenAI GPT-4: Used for generating answers to user questions.
-    Whisper: For transcribing audio input into text.
-    LangChain: Used for question-answering tasks with context management.
-    Pydub: Used for converting audio files (e.g., .m4a to .wav).
-    HTML/CSS/JavaScript: Basic front-end interface for interaction.
+Flask: Backend framework for handling requests and rendering the front end.
+OpenAI GPT-4: Used for generating answers to user questions.
+Whisper: For transcribing audio input into text.
+LangChain: Used for question-answering tasks with context management.
+Pydub: Used for converting audio files (e.g., .m4a to .wav).
+HTML/CSS/JavaScript: Basic front-end interface for interaction.
 
 📦 Installation
 
