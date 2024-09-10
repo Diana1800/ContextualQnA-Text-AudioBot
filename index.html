@@ -130,6 +130,7 @@
                 console.log('Response received from server:', data);  // Debugging
                 document.getElementById('output').innerHTML = data.response;
                 document.getElementById('user_input').value = '';  // Clear the input field after request
+                document.getElementById('audio_file').value = '';
             })
             .catch(error => {
                 console.error('Error occurred:', error);  // Log any errors
