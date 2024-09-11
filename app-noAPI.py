@@ -2,12 +2,11 @@ import os
 import whisper
 from flask import Flask, request, render_template_string, session, jsonify
 from werkzeug.utils import secure_filename
-from langchain.prompts import PromptTemplate
-import torch
+from transformers import pipeline
 
 
-# Load the HeBERT QA model (Hebrew SQuAD)
-qa_pipeline = pipeline("question-answering", model="tdklab/hebert-finetuned-hebrew-squad", max_answer_len=100 )
+# Load the BERT QA model 
+qa_pipeline = pipeline("question-answering", model="bert-large-uncased-whole-word-masking-finetuned-squad", max_answer_len=100 )
 
 # Load the Whisper model
 model = whisper.load_model("base")
