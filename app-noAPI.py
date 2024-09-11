@@ -15,15 +15,6 @@ model = whisper.load_model("base")
 with open('/home/diana/Documents/me.txt', 'r', encoding='utf-8') as file:
     all_data = file.read()
 
-# Define the prompt template for LangChain
-prompt_template = """
-Given the following context:
-{context}
-
-Answer the following question:
-{question}
-"""
-
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Save session
@@ -87,7 +78,7 @@ def chat():
         context = all_data   
         print(f"Context Length: {len(context)}")
 
-        # Generate an answer using HeBERT-QA
+        # Generate an answer using BERT-QA
         answer = qa_pipeline(question=user_input, context=context)
         answer_text = answer['answer']
         print(f"Generated Answer: {answer['answer']}")
