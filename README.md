@@ -1,10 +1,10 @@
 📱 Your content Q&A Bot with Text and Audio input Support 🤖
 
-This is a Flask-based web application that allows users to ask questions via text input or upload audio files for transcription and receive answers using OpenAI's GPT-4 model. The app also leverages Whisper for audio transcription and supports multiple audio formats. The application logs the conversation history and provides feedback for unsupported file formats.
+This is a Flask-based web application that allows users to ask questions via text input or upload audio files for transcription and receive answers using API of OpenAI GPT-4 model or traind model(in the code BERD QA model). The app also leverages Whisper for audio transcription and supports multiple audio formats. The application logs the conversation history and provides feedback for unsupported file formats.
 
 🧠 Key Features
 
-Text-Based Q&A: Users can submit text questions, which are answered using OpenAI's GPT-4 model.
+Text-Based Q&A: Users can submit text questions, which are answered using OpenAI's GPT-4 model or traind model.
 Audio Transcription: Users can upload audio files, which are transcribed into text using Whisper, and the transcribed text is used as the question input.
 Supported Audio Formats: The app supports audio files in .wav, .mp3, .ogg, and .flac formats. It also converts .m4a files to .wav before transcription.
 Conversation History: The app logs all questions and answers in the session, so users can scroll through the conversation history.
@@ -46,7 +46,9 @@ History: Each interaction (both question and answer) is stored and displayed in 
 🗂️ Project Structure
 
 
-├── app.py                # Main Flask application
+├── app.py                # Main Flask application (API needed)
+
+├── app_no_API.py                # Main Flask application (only with downloaded trained models)
 
 ├── requirements.txt      # Python dependencies
 
