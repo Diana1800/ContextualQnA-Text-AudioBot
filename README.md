@@ -48,7 +48,7 @@ History: Each interaction (both question and answer) is stored and displayed in 
 
 ├── app.py                # Main Flask application (API needed)
 
-├── app_no_API.py                # Main Flask application (only with downloaded trained models)
+├── app_noAPI.py          # Main Flask application (only with downloaded trained models)
 
 ├── requirements.txt      # Python dependencies
 
